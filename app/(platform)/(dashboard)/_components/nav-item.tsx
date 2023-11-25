@@ -44,8 +44,10 @@ export const NavItem = ({
                             alt="Organization"
                             className="rounded-sm object-cover"
                         />
-
                     </div>
+                    <span className="font-medium text-small">
+                        {organization.name}
+                    </span>
                 </div>
 
             </AccordionTrigger>
