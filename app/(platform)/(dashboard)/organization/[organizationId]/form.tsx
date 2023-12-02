@@ -12,16 +12,7 @@ export const Form = () => {
 
     return (
         <form action={dispatch}>
-            <div className="flex flex-col space-y-2">
-                <input
-                    id="title"
-                    name="title"
-                    required
-                    placeholder="Enter a board title"
-                    className="border-black border p-1"
-                />
-                <FormInput errors={state?.errors}/>
-            </div>
+            <FormInput errors={state?.errors}/>
             <Button type="submit">
                 Submit
             </Button>
