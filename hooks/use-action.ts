@@ -33,11 +33,8 @@ export const useAction = <TInput, TOutput>(
                 if (!result) {
                     return
                 }
-
-                //error for if something goes wrong with validation
-                if (result.fieldErrors) {
+                    //always update fieldErrors regardless if they exist or not
                     setFieldErrors(result.fieldErrors)
-                }
 
                 if (result.error) {
                     setError(result.error)
