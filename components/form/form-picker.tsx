@@ -7,6 +7,8 @@ import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { defaultImages } from "@/constants/images";
+import Link from "next/link";
 
 interface FormPickerProps {
     id: string;
@@ -18,7 +20,7 @@ export const FormPicker = ({
     errors,
 }: FormPickerProps) => {
     const { pending } = useFormStatus()
-    const [images, setImages] = useState<Array<Record<string, any>>>([])
+    const [images, setImages] = useState<Array<Record<string, any>>>(defaultImages)
     const [isLoading, setIsLoading] = useState(true)
     const [selectedImageId, setSelectedImageId] = useState(null)
 
@@ -39,7 +41,7 @@ export const FormPicker = ({
                 }
             } catch (error) {
                 console.log(error);
-                setImages([])
+                setImages(defaultImages)
             } finally {
                 setIsLoading(false)
             }
@@ -77,6 +79,14 @@ export const FormPicker = ({
                             className="object-cover rounded-sm"
                             fill
                         />
+                        {/* referencing creator of unsplash pictures */}
+                        <Link 
+                            href={image.links.html}
+                            target="_blank"
+                            className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] truncate text-white hover:underline p-1 bg-black/50"
+                        >
+                            {image.user.name}
+                        </Link>
                     </div>
                 ))}
             </div>
