@@ -40,7 +40,7 @@ export const ListItem = ({
                 />
                 <ol
                     className={cn(
-                        "mx-1 px-1 py-0.5 flex f lex-col gap-y-2",
+                        "mx-1 px-1 py-0.5 flex flex-col gap-y-2",
                         data.cards.length > 0 ? "mt-2" : "mt-0",
                     )}
                 >
