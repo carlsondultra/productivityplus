@@ -12,6 +12,15 @@ interface ListContainerProps {
     boardId: string;
 }
 
+//generic reorder function
+function reorder<T>(list: T[], startIndex: number, endIndex: number) {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed);
+
+    return result;
+}
+
 export const ListContainer = ({
     data,
     boardId,
@@ -23,8 +32,35 @@ export const ListContainer = ({
         setOrderedData(data)
     }, [data])
 
+    const onDragEnd = (result: any) => {
+        const { destination , source, type} = result
+
+        if(!destination) {
+            return
+        }
+
+        // checking if dropped in the same position
+        if (
+            destination.droppableId === source.droppableId && 
+            destination.index === source.index
+        ) {
+            return
+        }
+
+        // check if user moves a list
+        if (type === "list") {
+            const items = reorder(
+                orderedData,
+                source.index,
+                destination.index,
+            ).map((item, index) => ({ ...item, order: index}))
+
+            setOrderedData(items)
+        }
+    }
+
     return (
-        <DragDropContext onDragEnd={() => { }}>
+        <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="lists" type="list" direction="horizontal">
                 {(provided) => (
                     <ol
