@@ -57,6 +57,46 @@ export const ListContainer = ({
 
             setOrderedData(items)
         }
+
+        // check if user moves a card
+        if (type === "card") {
+            let newOrderedData = [...orderedData]
+
+            //source and destination list
+            const sourceList = newOrderedData.find(list => list.id === source.droppableId)
+            const destList = newOrderedData.find(list => list.id === destination.droppableId)
+
+            if (!sourceList || !destList) {
+                return
+            }
+
+            // check if cards exist on sourceList
+            if (!sourceList.cards) {
+                sourceList.cards = []
+            }
+
+            // check if cards exist on destList
+            if (!destList.cards) {
+                destList.cards = [];
+            }
+
+            // moving the card in the same list
+            if (source.droppableId === destination.droppableId) {
+                const reorderedCards = reorder(
+                    sourceList.cards,
+                    source.index,
+                    destination.index,
+                )
+
+                reorderedCards.forEach((card, idx) => {
+                    card.order = idx
+                })
+
+                sourceList.cards = reorderedCards
+
+                setOrderedData(newOrderedData)
+            }
+        }
     }
 
     return (
