@@ -95,6 +95,31 @@ export const ListContainer = ({
                 sourceList.cards = reorderedCards
 
                 setOrderedData(newOrderedData)
+
+                // check if user moves the card to another list
+            } else {
+                // removing card from source list
+                const [movedCard] = sourceList.cards.splice(source.index, 1)
+
+                // assign new listId to the moved card
+                movedCard.listId = destination.droppableId
+
+                // add card to destination list
+                destList.cards.splice(destination.index, 0, movedCard)
+
+                sourceList.cards.forEach((card, idx) => {
+                    card.order = idx
+                })
+
+                // update order for each card in the destination list
+                destList.cards.forEach((card, idx) => {
+                    card.order = idx
+                })
+
+                setOrderedData(newOrderedData)
+
+
+
             }
         }
     }
