@@ -144,6 +144,10 @@ export const ListContainer = ({
                 })
 
                 setOrderedData(newOrderedData)
+                executeUpdateCardOrder({
+                    boardId: boardId,
+                    items: destList.cards,
+                })
 
 
 
