@@ -6,6 +6,9 @@ import { ListForm } from "./list-form";
 import { useEffect, useState } from "react";
 import { ListItem } from "./list-item";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd"
+import { useAction } from "@/hooks/use-action";
+import { updateListOrder } from "@/actions/update-list-order";
+import { toast } from "sonner";
 
 interface ListContainerProps {
     data: ListWithCards[]
@@ -28,20 +31,29 @@ export const ListContainer = ({
     //modify locally before adding to database
     const [orderedData, setOrderedData] = useState(data)
 
+    const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
+        onSuccess: () => {
+            toast.success("List reordered")
+        },
+        onError: (error) => {
+            toast.error(error)
+        },
+    })
+
     useEffect(() => {
         setOrderedData(data)
     }, [data])
 
     const onDragEnd = (result: any) => {
-        const { destination , source, type} = result
+        const { destination, source, type } = result
 
-        if(!destination) {
+        if (!destination) {
             return
         }
 
         // checking if dropped in the same position
         if (
-            destination.droppableId === source.droppableId && 
+            destination.droppableId === source.droppableId &&
             destination.index === source.index
         ) {
             return
@@ -53,9 +65,10 @@ export const ListContainer = ({
                 orderedData,
                 source.index,
                 destination.index,
-            ).map((item, index) => ({ ...item, order: index}))
+            ).map((item, index) => ({ ...item, order: index }))
 
             setOrderedData(items)
+            executeUpdateListOrder({ items, boardId })
         }
 
         // check if user moves a card
