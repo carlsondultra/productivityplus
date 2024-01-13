@@ -2,6 +2,7 @@
 
 import { Skeleton } from "@/components/ui/skeleton"
 import { CardWithList } from "@/types"
+import { AlignLeft } from "lucide-react"
 
 interface DescriptionProps {
     data: CardWithList
@@ -11,7 +12,13 @@ export const Description = ({
     data
 }: DescriptionProps) => {
     return (
-        <div>
+        <div className="flex items-start gap-x-3 w-full">
+            <AlignLeft className="h-5 w-5 mt-0.5 text-neutral-700" />
+            <div className="w-full">
+                <p className="font-semibold text-neutral-700 mb-2">
+                    Description
+                </p>
+            </div>
             {data.description}
         </div>
     )
