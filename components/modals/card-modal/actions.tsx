@@ -10,6 +10,8 @@ import { useAction } from "@/hooks/use-action"
 import { copyCard } from "@/actions/copy-card"
 import { deleteCard } from "@/actions/delete-card"
 import { useParams } from "next/navigation"
+import { useCardModal } from "@/hooks/use-card-modal"
+import { toast } from "sonner"
 
 interface ActionsProps {
     data: CardWithList
@@ -20,8 +22,32 @@ export const Actions = ({
 }: ActionsProps) => {
 
     const params = useParams()
-    const { execute: executeCopyCard, isLoading: isLoadingCopy, } = useAction(copyCard)
-    const { execute: executeDeleteCard, isLoading: isLoadingDelete, } = useAction(deleteCard)
+    const cardModal = useCardModal()
+    const { 
+        execute: executeCopyCard, 
+        isLoading: isLoadingCopy, 
+    } = useAction(copyCard, {
+        onSuccess: (data) => {
+            toast.success(`Card "${data.title}" copied`)
+            cardModal.onClose()
+        },
+        onError: (error) => {
+            toast.error(error)
+        }
+    })
+
+    const { 
+        execute: executeDeleteCard, 
+        isLoading: isLoadingDelete, 
+    } = useAction(deleteCard, {
+        onSuccess: (data) => {
+            toast.success(`Card "${data.title}" deleted`)
+            cardModal.onClose()
+        },
+        onError: (error) => {
+            toast.error(error)
+        }
+    })
 
     const onCopy = () => {
         const boardId = params.boardId as string
