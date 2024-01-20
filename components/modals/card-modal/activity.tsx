@@ -1,5 +1,6 @@
 "use client"
 
+import { ActivityItem } from "@/components/activity-item";
 import { Skeleton } from "@/components/ui/skeleton"
 import { AuditLog } from "@prisma/client";
 import { ActivityIcon } from "lucide-react";
@@ -19,8 +20,11 @@ export const Activity = ({
                     Activity
                 </p>
                 <ol className="mt-2 space-y-4">
-                    {items.map((items) => (
-                        <p>{items.entityTitle}</p>
+                    {items.map((item) => (
+                        <ActivityItem
+                            key={item.id}
+                            data={item}
+                        />
                     ))}
                 </ol>
             </div>
