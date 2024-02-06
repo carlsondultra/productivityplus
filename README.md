@@ -1,7 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## ProductivityPlus
 Visit the application at: https://productivityplus.vercel.app/
+
+## Features
+- Authentication (via Clerk)
+- Organizations / Workspaces
+- Unsplash API for random cover images
+- Activity logs 
+- Board / List / Card creation
+- Renaming, deleting, drag & drop reorder and copy for Lists / Cards
+- Board limit for each organization
+- Stripe subscription for each organization in order to unlock unlimited boards
+- Landing page
+- MySQL DB
+- Prisma ORM
+- shadcnUI & TailwindCSS
 
 ## Getting Started
 
