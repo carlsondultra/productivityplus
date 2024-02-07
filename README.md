@@ -17,16 +17,52 @@ Visit the application at: https://productivityplus.vercel.app/
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository:
 
-```bash
+```shell
+git clone https://github.com/AntonioErdeljac/next13-trello.git
+```
+
+Install packages:
+
+```shell
+npm i
+```
+
+Setup .env file:
+
+
+```js
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=
+
+DATABASE_URL=
+
+NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=
+
+STRIPE_API_KEY=
+
+NEXT_PUBLIC_APP_URL=
+
+STRIPE_WEBHOOK_SECRET=
+```
+
+Setup Prisma (MySQL Database used): 
+
+```shell
+npx prisma generate
+npx prisma db push
+
+```
+
+Run the application:
+
+```shell
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
