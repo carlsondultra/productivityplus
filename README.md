@@ -1,4 +1,6 @@
 ## ProductivityPlus
+ProductivityPlus is a list-making application that allows team members to collaborate and manage projects both efficiently and effectively.
+
 Visit the application at: https://productivityplus.vercel.app/
 
 ## Features
