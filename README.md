@@ -13,7 +13,7 @@ Visit the application at: https://productivityplus.vercel.app/
 - Board limit for each organization
 - Stripe subscription for each organization in order to unlock unlimited boards
 - Landing page
-- MySQL DB
+- MySQL DB (via Aiven)
 - Prisma ORM
 - shadcnUI & TailwindCSS
 
